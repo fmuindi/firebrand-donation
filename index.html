@@ -10,7 +10,7 @@
 
 <style>
 :root {
-  --fire: #FF5C1A;
+  --fire: #D4A574;
   --gold: #F5A623;
   --deep: #0F0B08;
   --charcoal: #1A1410;
@@ -540,28 +540,56 @@ body {
 /* ─── MATATU POPUP ─── */
 .matatu-popup {
   position: fixed;
-  bottom: 1.5rem;
-  right: 1.5rem;
-  z-index: 500;
-  width: min(340px, calc(100vw - 3rem));
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  background: rgba(0, 0, 0, 0.88);
+  backdrop-filter: blur(4px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+}
+.matatu-popup.visible { opacity: 1; pointer-events: all; }
+.matatu-popup.dismissed { opacity: 0; pointer-events: none; }
+
+.matatu-popup-content {
+  background: var(--charcoal);
   border-radius: var(--radius);
   overflow: hidden;
-  box-shadow: 0 20px 60px rgba(0,0,0,0.7), 0 0 0 1px rgba(255,92,26,0.3);
-  transform: translateY(20px);
-  opacity: 0;
-  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.5s ease;
-  background: var(--charcoal);
+  max-width: 500px;
+  width: 100%;
+  box-shadow: 0 20px 80px rgba(0,0,0,0.9);
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  animation: popupSlideUp 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
-.matatu-popup.visible { transform: translateY(0); opacity: 1; }
-.matatu-popup.dismissed { transform: translateY(120%); opacity: 0; pointer-events: none; }
+
+@keyframes popupSlideUp {
+  from { transform: scale(0.92) translateY(30px); opacity: 0; }
+  to { transform: scale(1) translateY(0); opacity: 1; }
+}
 
 .popup-img-wrap {
   position: relative;
-  height: 170px;
+  height: 220px;
   overflow: hidden;
   cursor: pointer;
   display: block;
   text-decoration: none;
+  flex-shrink: 0;
+}
+
+@media (max-width: 600px) {
+  .popup-img-wrap { height: 200px; }
 }
 .popup-img-wrap img {
   width: 100%;
@@ -576,57 +604,76 @@ body {
   background: linear-gradient(135deg, var(--fire), var(--gold));
   color: #fff;
   font-family: 'Barlow Condensed', sans-serif;
-  font-size: 0.7rem;
+  font-size: clamp(0.65rem, 1.5vw, 0.8rem);
   font-weight: 700;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  padding: 0.3em 0.85em;
+  padding: clamp(0.25em, 1vw, 0.4em) clamp(0.7em, 2vw, 1em);
   border-radius: 50px;
 }
 
+@media (max-width: 600px) {
+  .popup-campaign-badge { top: 10px; left: 10px; }
+}
+
 .popup-body {
-  padding: 1.25rem 1.25rem 1.4rem;
+  padding: clamp(1.25rem, 4vw, 2rem);
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  justify-content: space-between;
+  overflow-y: auto;
 }
 .popup-body h3 {
   font-family: 'Barlow Condensed', sans-serif;
-  font-size: 1.45rem;
+  font-size: clamp(1.3rem, 4vw, 1.6rem);
   font-weight: 800;
   text-transform: uppercase;
   color: var(--cream);
   line-height: 1.1;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.7rem;
 }
 .popup-body p {
-  font-size: 0.85rem;
-  color: rgba(249,240,227,0.6);
-  line-height: 1.55;
-  margin-bottom: 1.1rem;
+  font-size: clamp(0.85rem, 2vw, 1rem);
+  color: rgba(249,240,227,0.65);
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
 }
 .popup-body .give-btn {
   width: 100%;
   justify-content: center;
-  font-size: 1rem;
-  padding: 0.75em 1.5em;
+  font-size: clamp(0.95rem, 2.5vw, 1.1rem);
+  padding: clamp(0.65em, 2vw, 0.85em) clamp(1.2em, 3vw, 1.8em);
+  margin-top: auto;
+  flex-shrink: 0;
+}
+
+@media (max-width: 600px) {
+  .popup-body { padding: 1.5rem 1.25rem 1.25rem; }
 }
 
 .popup-close {
   position: absolute;
-  top: 10px; right: 10px;
-  width: 32px; height: 32px;
-  background: rgba(0,0,0,0.55);
+  top: 12px; right: 12px;
+  width: 40px; height: 40px;
+  background: rgba(0,0,0,0.6);
   border: none;
   border-radius: 50%;
   cursor: pointer;
   color: #fff;
-  font-size: 0.9rem;
+  font-size: 1.1rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 2;
+  z-index: 10;
   transition: background 0.2s;
-  backdrop-filter: blur(4px);
+  backdrop-filter: blur(6px);
 }
 .popup-close:hover { background: var(--fire); }
+
+@media (max-width: 600px) {
+  .popup-close { width: 36px; height: 36px; top: 10px; right: 10px; font-size: 1rem; }
+}
 
 /* ─── KEYFRAMES ─── */
 @keyframes fadeUp {
@@ -649,8 +696,8 @@ body {
 }
 
 @media (max-width: 500px) {
-  .matatu-popup { bottom: 0.75rem; right: 0.75rem; left: 0.75rem; width: auto; }
   .impact-grid { grid-template-columns: repeat(2, 1fr); }
+  .matatu-popup-content { max-width: 95vw; }
 }
 
 /* ─── SCROLL REVEAL ─── */
@@ -667,7 +714,7 @@ body {
 <!-- ─── HEADER ─── -->
 <header class="site-header">
   <img src="https://elro-images.s3.us-east-2.amazonaws.com/tosm/firebrand/firebrand+logo.png" alt="Firebrand Nation" loading="eager">
-  <a href="https://secure.givelively.org/donate/eternal-lifes-restoration-outreach/mega-crusade" target="_blank" rel="noopener" class="give-btn" aria-label="Give to Firebrand Nation Mega Crusade">
+  <a href="https://secure.givelively.org/donate/eternal-lifes-restoration-outreach/mega-crusade-kenya-ministry-bus-purchase" target="_blank" rel="noopener" class="give-btn" aria-label="Give to Firebrand Nation Mega Crusade">
     <i class="fas fa-fire"></i> Give
   </a>
 </header>
@@ -677,7 +724,7 @@ body {
   <p class="hero-eyebrow">Mega Crusade Kenya · Partner With Us</p>
   <h1>Friends of<br><span>Firebrand Nation</span></h1>
   <p class="hero-sub">Partner with us as we reach souls, disciple new believers, and help bring them into the house of God.</p>
-  <a href="https://secure.givelively.org/donate/eternal-lifes-restoration-outreach/mega-crusade" target="_blank" rel="noopener" class="give-btn" aria-label="Give to the Mega Crusade">
+  <a href="https://secure.givelively.org/donate/eternal-lifes-restoration-outreach/mega-crusade-kenya-ministry-bus-purchase" target="_blank" rel="noopener" class="give-btn" aria-label="Give to the Mega Crusade">
     <i class="fas fa-fire"></i> Give Now
   </a>
 
@@ -694,7 +741,7 @@ body {
     <span class="section-label">Ministry</span>
     <h2>Fellowship &amp;<br>Missions</h2>
     <p>We gather, serve, preach, and go where the gospel needs to be heard. Your giving helps us reach communities with the love and power of Jesus Christ.</p>
-    <a href="https://secure.givelively.org/donate/eternal-lifes-restoration-outreach/mega-crusade" target="_blank" rel="noopener" class="give-btn" aria-label="Give">
+    <a href="https://secure.givelively.org/donate/eternal-lifes-restoration-outreach/mega-crusade-kenya-ministry-bus-purchase" target="_blank" rel="noopener" class="give-btn" aria-label="Give">
       <i class="fas fa-fire"></i> Give
     </a>
   </div>
@@ -709,7 +756,7 @@ body {
     <span class="section-label">Stories</span>
     <h2>Joyful<br>Moments</h2>
     <p>Every smile tells a story of hope, freedom, and transformation. These moments remind us why we go, why we give, and why every soul matters.</p>
-    <a href="https://secure.givelively.org/donate/eternal-lifes-restoration-outreach/mega-crusade" target="_blank" rel="noopener" class="give-btn" aria-label="Give">
+    <a href="https://secure.givelively.org/donate/eternal-lifes-restoration-outreach/mega-crusade-kenya-ministry-bus-purchase" target="_blank" rel="noopener" class="give-btn" aria-label="Give">
       <i class="fas fa-fire"></i> Give
     </a>
   </div>
@@ -724,7 +771,7 @@ body {
     <span class="section-label">Outreach</span>
     <h2>Food<br>Program</h2>
     <p>The gospel is preached, and love is demonstrated. Through food outreach, families are strengthened, communities are served, and hearts are opened.</p>
-    <a href="https://secure.givelively.org/donate/eternal-lifes-restoration-outreach/mega-crusade" target="_blank" rel="noopener" class="give-btn" aria-label="Give">
+    <a href="https://secure.givelively.org/donate/eternal-lifes-restoration-outreach/mega-crusade-kenya-ministry-bus-purchase" target="_blank" rel="noopener" class="give-btn" aria-label="Give">
       <i class="fas fa-fire"></i> Give
     </a>
   </div>
@@ -739,7 +786,7 @@ body {
     <span class="section-label">Growth</span>
     <h2>Disciple&shy;ship</h2>
     <p>Winning souls is only the beginning. We are committed to helping new believers grow, belong, and become rooted in the Word, prayer, and fellowship.</p>
-    <a href="https://secure.givelively.org/donate/eternal-lifes-restoration-outreach/mega-crusade" target="_blank" rel="noopener" class="give-btn" aria-label="Give">
+    <a href="https://secure.givelively.org/donate/eternal-lifes-restoration-outreach/mega-crusade-kenya-ministry-bus-purchase" target="_blank" rel="noopener" class="give-btn" aria-label="Give">
       <i class="fas fa-fire"></i> Give
     </a>
   </div>
@@ -796,7 +843,7 @@ body {
   </div>
 
   <div class="impact-cta">
-    <a href="https://secure.givelively.org/donate/eternal-lifes-restoration-outreach/mega-crusade" target="_blank" rel="noopener" class="give-btn" aria-label="Give">
+    <a href="https://secure.givelively.org/donate/eternal-lifes-restoration-outreach/mega-crusade-kenya-ministry-bus-purchase" target="_blank" rel="noopener" class="give-btn" aria-label="Give">
       <i class="fas fa-fire"></i> Be Part of the Next Harvest
     </a>
   </div>
@@ -804,10 +851,10 @@ body {
 
 <!-- ─── FINAL CTA ─── -->
 <section class="final-cta reveal" aria-label="Final Call to Action">
-  <span class="eyebrow">Matatu Campaign · Help Us Bring Them Home</span>
+  <span class="eyebrow">Bus Campaign · Help Us Bring Them Home</span>
   <h2>Help Us Bring<br><em>New Believers Home</em></h2>
   <p>When souls are won, the journey continues. Your gift helps provide transportation, discipleship, fellowship, and a path for new believers to grow in Christ.</p>
-  <a href="https://secure.givelively.org/donate/eternal-lifes-restoration-outreach/mega-crusade" target="_blank" rel="noopener" class="give-btn" aria-label="Give to bring new believers home">
+  <a href="https://secure.givelively.org/donate/eternal-lifes-restoration-outreach/mega-crusade-kenya-ministry-bus-purchase" target="_blank" rel="noopener" class="give-btn" aria-label="Give to bring new believers home">
     <i class="fas fa-fire"></i> Give Now
   </a>
 </section>
@@ -815,7 +862,7 @@ body {
 <!-- ─── FOOTER ─── -->
 <footer class="site-footer">
   <div><img src="https://elro-images.s3.us-east-2.amazonaws.com/tosm/firebrand/firebrand+logo.png" alt="Firebrand Nation"></div>
-  <p>&copy; 2025 Firebrand Nation. All rights reserved. · <a href="https://secure.givelively.org/donate/eternal-lifes-restoration-outreach/mega-crusade" target="_blank" rel="noopener">Give</a></p>
+  <p>&copy; 2025 Firebrand Nation. All rights reserved. · <a href="https://secure.givelively.org/donate/eternal-lifes-restoration-outreach/mega-crusade-kenya-ministry-bus-purchase" target="_blank" rel="noopener">Give</a></p>
 </footer>
 
 <!-- ─── LIGHTBOX ─── -->
@@ -825,24 +872,28 @@ body {
 </div>
 
 <!-- ─── MATATU POPUP ─── -->
-<div class="matatu-popup" id="matatuPopup" role="complementary" aria-label="Matatu donation campaign">
-  <button class="popup-close" id="popupClose" aria-label="Dismiss campaign popup"><i class="fas fa-times"></i></button>
-  <a href="https://secure.givelively.org/donate/eternal-lifes-restoration-outreach/mega-crusade" target="_blank" rel="noopener" class="popup-img-wrap" aria-label="View Matatu campaign">
-    <img src="https://ik.imagekit.io/vddpcxj7e/firebrand/matatu-firebrand.png?tr=f-auto,q-auto,w-700" alt="Matatu bus for new believers" loading="lazy">
-    <span class="popup-campaign-badge">Current Campaign</span>
-  </a>
-  <div class="popup-body">
-    <h3>Help Us Purchase<br>a Matatu</h3>
-    <p>After souls are won, we help bring them to church for fellowship, discipleship, and growth. Your giving helps provide transportation for new believers.</p>
-    <a href="https://secure.givelively.org/donate/eternal-lifes-restoration-outreach/mega-crusade" target="_blank" rel="noopener" class="give-btn" aria-label="Give to the Matatu campaign">
-      <i class="fas fa-fire"></i> Give
+<div class="matatu-popup" id="matatuPopup" role="dialog" aria-modal="true" aria-label="Matatu donation campaign">
+  <div class="matatu-popup-content">
+    <button class="popup-close" id="popupClose" aria-label="Dismiss campaign popup"><i class="fas fa-times"></i></button>
+    <a href="https://secure.givelively.org/donate/eternal-lifes-restoration-outreach/mega-crusade-kenya-ministry-bus-purchase" target="_blank" rel="noopener" class="popup-img-wrap" aria-label="View Matatu campaign">
+      <img src="https://ik.imagekit.io/vddpcxj7e/firebrand/matatu-firebrand.png?tr=f-auto,q-auto,w-700" alt="Matatu bus for new believers" loading="lazy">
+      <span class="popup-campaign-badge">Current Campaign</span>
     </a>
+    <div class="popup-body">
+      <div>
+        <h3>Help Us Purchase<br>a Bus</h3>
+        <p>Winning souls is only the beginning - after the crusade, we want to help new believers get to church, grow in the Word, prayer, fellowship, and become rooted in Christ. Your giving makes this possible by providing transportation so they can come, connect, be discipled, and continue their journey of faith.</p>
+      </div>
+      <a href="https://secure.givelively.org/donate/eternal-lifes-restoration-outreach/mega-crusade-kenya-ministry-bus-purchase" target="_blank" rel="noopener" class="give-btn" aria-label="Give to the Matatu campaign">
+        <i class="fas fa-fire"></i> Give
+      </a>
+    </div>
   </div>
 </div>
 
 <script>
 (function() {
-  const DONATE_URL = 'https://secure.givelively.org/donate/eternal-lifes-restoration-outreach/mega-crusade';
+  const DONATE_URL = 'https://secure.givelively.org/donate/eternal-lifes-restoration-outreach/mega-crusade-kenya-ministry-bus-purchase';
 
   // ─── IMAGE DATA ───
   const heroImages = [
@@ -970,11 +1021,26 @@ body {
   const popup = document.getElementById('matatuPopup');
   const popupClose = document.getElementById('popupClose');
 
-  setTimeout(() => { popup.classList.add('visible'); }, 1200);
+  // Show popup immediately on page load
+  popup.classList.add('visible');
 
   popupClose.addEventListener('click', e => {
     e.stopPropagation();
     popup.classList.add('dismissed');
+  });
+
+  // Close on backdrop click
+  popup.addEventListener('click', e => {
+    if (e.target === popup) {
+      popup.classList.add('dismissed');
+    }
+  });
+
+  // Close on Escape key
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && popup.classList.contains('visible')) {
+      popup.classList.add('dismissed');
+    }
   });
 
   // ─── SCROLL REVEAL ───
