@@ -7,6 +7,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Nunito:wght@400;500;600;700&family=Playfair+Display:ital,wght@1,700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="icon" type="image/x-icon" href="https://elro-images.s3.us-east-2.amazonaws.com/tosm/firebrand/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://elro-images.s3.us-east-2.amazonaws.com/tosm/firebrand/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://elro-images.s3.us-east-2.amazonaws.com/tosm/firebrand/favicon-32x32.png">
 
 <style>
 :root {
@@ -429,8 +432,7 @@ body {
 /* ─── FINAL CTA ─── */
 .final-cta {
   background: var(--deep);
-  padding: clamp(5rem, 10vw, 8rem) clamp(1.5rem, 5vw, 4rem);
-  text-align: center;
+  padding: clamp(4rem, 8vw, 6.5rem) clamp(1.5rem, 5vw, 4rem);
   position: relative;
   overflow: hidden;
 }
@@ -438,9 +440,25 @@ body {
   content: '';
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse 70% 50% at 50% 50%, rgba(255,92,26,0.14) 0%, transparent 70%);
+  background: radial-gradient(ellipse 70% 50% at 50% 50%, rgba(212,165,116,0.14) 0%, transparent 70%);
   pointer-events: none;
 }
+
+.final-cta-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(2rem, 5vw, 4rem);
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.final-cta-content {
+  text-align: left;
+}
+
 .final-cta .eyebrow {
   font-family: 'Barlow Condensed', sans-serif;
   font-size: 0.85rem;
@@ -450,18 +468,17 @@ body {
   margin-bottom: 1rem;
   display: block;
 }
+
 .final-cta h2 {
   font-family: 'Barlow Condensed', sans-serif;
-  font-size: clamp(2.5rem, 7vw, 5.5rem);
+  font-size: clamp(2.2rem, 6vw, 4.5rem);
   font-weight: 900;
   text-transform: uppercase;
-  line-height: 1;
+  line-height: 1.05;
   color: var(--cream);
   margin-bottom: 1.5rem;
-  max-width: 700px;
-  margin-left: auto;
-  margin-right: auto;
 }
+
 .final-cta h2 em {
   font-style: normal;
   background: linear-gradient(135deg, var(--fire), var(--gold));
@@ -470,16 +487,96 @@ body {
   background-clip: text;
   display: block;
 }
+
 .final-cta p {
-  font-size: clamp(1rem, 2vw, 1.2rem);
-  color: rgba(249,240,227,0.65);
-  max-width: 520px;
-  margin: 0 auto 2.5rem;
+  font-size: clamp(0.95rem, 1.8vw, 1.1rem);
+  color: rgba(249,240,227,0.7);
   line-height: 1.75;
+  margin-bottom: 1.2rem;
 }
+
+.final-cta .campaign-detail {
+  font-size: 0.95rem;
+  color: rgba(249,240,227,0.6);
+  margin-bottom: 2rem !important;
+}
+
 .final-cta .give-btn {
-  font-size: clamp(1.2rem, 3vw, 1.6rem);
-  padding: 1em 3em;
+  font-size: clamp(1rem, 2.5vw, 1.3rem);
+  padding: 0.9em 2.2em;
+  margin-top: 0.5rem;
+}
+
+.final-cta-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.campaign-image-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 500px;
+  aspect-ratio: 1;
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: 0 15px 50px rgba(0,0,0,0.5);
+}
+
+.campaign-image-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.campaign-image-wrap:hover img {
+  transform: scale(1.05);
+}
+
+.campaign-badge-overlay {
+  position: absolute;
+  top: 16px; left: 16px;
+  background: linear-gradient(135deg, var(--fire), var(--gold));
+  color: #fff;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(0.7rem, 2vw, 0.85rem);
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  padding: 0.4em 1em;
+  border-radius: 50px;
+  z-index: 2;
+}
+
+@media (max-width: 900px) {
+  .final-cta-wrapper {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+  .final-cta-content {
+    text-align: center;
+  }
+  .campaign-image-wrap {
+    max-width: 400px;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 600px) {
+  .final-cta {
+    padding: 3rem clamp(1.25rem, 3vw, 2rem);
+  }
+  .final-cta-wrapper {
+    gap: 2rem;
+  }
+  .campaign-image-wrap {
+    max-width: 100%;
+  }
+  .final-cta .give-btn {
+    width: 100%;
+    padding: 0.85em 2em;
+  }
 }
 
 /* ─── FOOTER ─── */
@@ -537,143 +634,7 @@ body {
 }
 .lightbox-close:hover { background: rgba(255,92,26,0.6); }
 
-/* ─── MATATU POPUP ─── */
-.matatu-popup {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  width: 100vw;
-  height: 100vh;
-  z-index: 1000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 1.5rem;
-  background: rgba(0, 0, 0, 0.88);
-  backdrop-filter: blur(4px);
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.4s ease;
-}
-.matatu-popup.visible { opacity: 1; pointer-events: all; }
-.matatu-popup.dismissed { opacity: 0; pointer-events: none; }
 
-.matatu-popup-content {
-  background: var(--charcoal);
-  border-radius: var(--radius);
-  overflow: hidden;
-  max-width: 500px;
-  width: 100%;
-  box-shadow: 0 20px 80px rgba(0,0,0,0.9);
-  max-height: 90vh;
-  display: flex;
-  flex-direction: column;
-  animation: popupSlideUp 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
-}
-
-@keyframes popupSlideUp {
-  from { transform: scale(0.92) translateY(30px); opacity: 0; }
-  to { transform: scale(1) translateY(0); opacity: 1; }
-}
-
-.popup-img-wrap {
-  position: relative;
-  height: 220px;
-  overflow: hidden;
-  cursor: pointer;
-  display: block;
-  text-decoration: none;
-  flex-shrink: 0;
-}
-
-@media (max-width: 600px) {
-  .popup-img-wrap { height: 200px; }
-}
-.popup-img-wrap img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.5s;
-}
-.popup-img-wrap:hover img { transform: scale(1.05); }
-.popup-campaign-badge {
-  position: absolute;
-  top: 12px; left: 12px;
-  background: linear-gradient(135deg, var(--fire), var(--gold));
-  color: #fff;
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: clamp(0.65rem, 1.5vw, 0.8rem);
-  font-weight: 700;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  padding: clamp(0.25em, 1vw, 0.4em) clamp(0.7em, 2vw, 1em);
-  border-radius: 50px;
-}
-
-@media (max-width: 600px) {
-  .popup-campaign-badge { top: 10px; left: 10px; }
-}
-
-.popup-body {
-  padding: clamp(1.25rem, 4vw, 2rem);
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
-  justify-content: space-between;
-  overflow-y: auto;
-}
-.popup-body h3 {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: clamp(1.3rem, 4vw, 1.6rem);
-  font-weight: 800;
-  text-transform: uppercase;
-  color: var(--cream);
-  line-height: 1.1;
-  margin-bottom: 0.7rem;
-}
-.popup-body p {
-  font-size: clamp(0.85rem, 2vw, 1rem);
-  color: rgba(249,240,227,0.65);
-  line-height: 1.6;
-  margin-bottom: 1.5rem;
-}
-.popup-body .give-btn {
-  width: 100%;
-  justify-content: center;
-  font-size: clamp(0.95rem, 2.5vw, 1.1rem);
-  padding: clamp(0.65em, 2vw, 0.85em) clamp(1.2em, 3vw, 1.8em);
-  margin-top: auto;
-  flex-shrink: 0;
-}
-
-@media (max-width: 600px) {
-  .popup-body { padding: 1.5rem 1.25rem 1.25rem; }
-}
-
-.popup-close {
-  position: absolute;
-  top: 12px; right: 12px;
-  width: 40px; height: 40px;
-  background: rgba(0,0,0,0.6);
-  border: none;
-  border-radius: 50%;
-  cursor: pointer;
-  color: #fff;
-  font-size: 1.1rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 10;
-  transition: background 0.2s;
-  backdrop-filter: blur(6px);
-}
-.popup-close:hover { background: var(--fire); }
-
-@media (max-width: 600px) {
-  .popup-close { width: 36px; height: 36px; top: 10px; right: 10px; font-size: 1rem; }
-}
 
 /* ─── KEYFRAMES ─── */
 @keyframes fadeUp {
@@ -697,7 +658,6 @@ body {
 
 @media (max-width: 500px) {
   .impact-grid { grid-template-columns: repeat(2, 1fr); }
-  .matatu-popup-content { max-width: 95vw; }
 }
 
 /* ─── SCROLL REVEAL ─── */
@@ -714,17 +674,17 @@ body {
 <!-- ─── HEADER ─── -->
 <header class="site-header">
   <img src="https://elro-images.s3.us-east-2.amazonaws.com/tosm/firebrand/firebrand+logo.png" alt="Firebrand Nation" loading="eager">
-  <a href="https://secure.givelively.org/donate/eternal-lifes-restoration-outreach/mega-crusade-kenya-ministry-bus-purchase" target="_blank" rel="noopener" class="give-btn" aria-label="Give to Firebrand Nation Mega Crusade">
+  <a href="https://secure.givelively.org/donate/eternal-lifes-restoration-outreach/mega-crusade" target="_blank" rel="noopener" class="give-btn" aria-label="Give to Firebrand Nation Mega Crusade">
     <i class="fas fa-fire"></i> Give
   </a>
 </header>
 
 <!-- ─── HERO ─── -->
 <section class="hero" aria-label="Hero">
-  <p class="hero-eyebrow">Mega Crusade Kenya · Partner With Us</p>
+  <p class="hero-eyebrow">ALONE A FLAME - TOGETHER A FIRE!</p>
   <h1>Friends of<br><span>Firebrand Nation</span></h1>
   <p class="hero-sub">Partner with us as we reach souls, disciple new believers, and help bring them into the house of God.</p>
-  <a href="https://secure.givelively.org/donate/eternal-lifes-restoration-outreach/mega-crusade-kenya-ministry-bus-purchase" target="_blank" rel="noopener" class="give-btn" aria-label="Give to the Mega Crusade">
+  <a href="https://secure.givelively.org/donate/eternal-lifes-restoration-outreach/mega-crusade" target="_blank" rel="noopener" class="give-btn" aria-label="Give to the Mega Crusade">
     <i class="fas fa-fire"></i> Give Now
   </a>
 
@@ -741,7 +701,7 @@ body {
     <span class="section-label">Ministry</span>
     <h2>Fellowship &amp;<br>Missions</h2>
     <p>We gather, serve, preach, and go where the gospel needs to be heard. Your giving helps us reach communities with the love and power of Jesus Christ.</p>
-    <a href="https://secure.givelively.org/donate/eternal-lifes-restoration-outreach/mega-crusade-kenya-ministry-bus-purchase" target="_blank" rel="noopener" class="give-btn" aria-label="Give">
+    <a href="https://secure.givelively.org/donate/eternal-lifes-restoration-outreach/mega-crusade" target="_blank" rel="noopener" class="give-btn" aria-label="Give">
       <i class="fas fa-fire"></i> Give
     </a>
   </div>
@@ -756,7 +716,7 @@ body {
     <span class="section-label">Stories</span>
     <h2>Joyful<br>Moments</h2>
     <p>Every smile tells a story of hope, freedom, and transformation. These moments remind us why we go, why we give, and why every soul matters.</p>
-    <a href="https://secure.givelively.org/donate/eternal-lifes-restoration-outreach/mega-crusade-kenya-ministry-bus-purchase" target="_blank" rel="noopener" class="give-btn" aria-label="Give">
+    <a href="https://secure.givelively.org/donate/eternal-lifes-restoration-outreach/mega-crusade" target="_blank" rel="noopener" class="give-btn" aria-label="Give">
       <i class="fas fa-fire"></i> Give
     </a>
   </div>
@@ -771,7 +731,7 @@ body {
     <span class="section-label">Outreach</span>
     <h2>Food<br>Program</h2>
     <p>The gospel is preached, and love is demonstrated. Through food outreach, families are strengthened, communities are served, and hearts are opened.</p>
-    <a href="https://secure.givelively.org/donate/eternal-lifes-restoration-outreach/mega-crusade-kenya-ministry-bus-purchase" target="_blank" rel="noopener" class="give-btn" aria-label="Give">
+    <a href="https://secure.givelively.org/donate/eternal-lifes-restoration-outreach/mega-crusade" target="_blank" rel="noopener" class="give-btn" aria-label="Give">
       <i class="fas fa-fire"></i> Give
     </a>
   </div>
@@ -786,7 +746,7 @@ body {
     <span class="section-label">Growth</span>
     <h2>Disciple&shy;ship</h2>
     <p>Winning souls is only the beginning. We are committed to helping new believers grow, belong, and become rooted in the Word, prayer, and fellowship.</p>
-    <a href="https://secure.givelively.org/donate/eternal-lifes-restoration-outreach/mega-crusade-kenya-ministry-bus-purchase" target="_blank" rel="noopener" class="give-btn" aria-label="Give">
+    <a href="https://secure.givelively.org/donate/eternal-lifes-restoration-outreach/mega-crusade" target="_blank" rel="noopener" class="give-btn" aria-label="Give">
       <i class="fas fa-fire"></i> Give
     </a>
   </div>
@@ -843,26 +803,37 @@ body {
   </div>
 
   <div class="impact-cta">
-    <a href="https://secure.givelively.org/donate/eternal-lifes-restoration-outreach/mega-crusade-kenya-ministry-bus-purchase" target="_blank" rel="noopener" class="give-btn" aria-label="Give">
+    <a href="https://secure.givelively.org/donate/eternal-lifes-restoration-outreach/mega-crusade" target="_blank" rel="noopener" class="give-btn" aria-label="Give">
       <i class="fas fa-fire"></i> Be Part of the Next Harvest
     </a>
   </div>
 </section>
 
 <!-- ─── FINAL CTA ─── -->
-<section class="final-cta reveal" aria-label="Final Call to Action">
-  <span class="eyebrow">Bus Campaign · Help Us Bring Them Home</span>
-  <h2>Help Us Bring<br><em>New Believers Home</em></h2>
-  <p>When souls are won, the journey continues. Your gift helps provide transportation, discipleship, fellowship, and a path for new believers to grow in Christ.</p>
-  <a href="https://secure.givelively.org/donate/eternal-lifes-restoration-outreach/mega-crusade-kenya-ministry-bus-purchase" target="_blank" rel="noopener" class="give-btn" aria-label="Give to bring new believers home">
-    <i class="fas fa-fire"></i> Give Now
-  </a>
-</section>
+<!-- <section class="final-cta reveal" aria-label="Final Call to Action">
+  <div class="final-cta-wrapper">
+    <div class="final-cta-content">
+      <span class="eyebrow">Matatu Campaign · Help Us Bring Them Home</span>
+      <h2>Help Us Bring<br><em>New Believers Home</em></h2>
+      <p>When souls are won, the journey continues. Your gift helps provide transportation, discipleship, fellowship, and a path for new believers to grow in Christ.</p>
+      <p class="campaign-detail">After souls are won, we help bring them to church for fellowship, discipleship, and growth. Your giving helps provide transportation for new believers.</p>
+      <a href="https://secure.givelively.org/donate/eternal-lifes-restoration-outreach/mega-crusade" target="_blank" rel="noopener" class="give-btn" aria-label="Give to bring new believers home">
+        <i class="fas fa-fire"></i> Give Now
+      </a>
+    </div>
+    <div class="final-cta-image">
+      <div class="campaign-image-wrap">
+        <img src="https://ik.imagekit.io/vddpcxj7e/firebrand/matatu-firebrand.png?tr=f-auto,q-auto,w-700" alt="Matatu bus for new believers" loading="lazy">
+        <span class="campaign-badge-overlay">Current Campaign</span>
+      </div>
+    </div>
+  </div>
+</section> -->
 
 <!-- ─── FOOTER ─── -->
 <footer class="site-footer">
   <div><img src="https://elro-images.s3.us-east-2.amazonaws.com/tosm/firebrand/firebrand+logo.png" alt="Firebrand Nation"></div>
-  <p>&copy; 2025 Firebrand Nation. All rights reserved. · <a href="https://secure.givelively.org/donate/eternal-lifes-restoration-outreach/mega-crusade-kenya-ministry-bus-purchase" target="_blank" rel="noopener">Give</a></p>
+  <p>&copy; 2026 Firebrand Nation. All rights reserved. · <a href="https://secure.givelively.org/donate/eternal-lifes-restoration-outreach/mega-crusade" target="_blank" rel="noopener">Give</a></p>
 </footer>
 
 <!-- ─── LIGHTBOX ─── -->
@@ -871,29 +842,11 @@ body {
   <img id="lightboxImg" src="" alt="">
 </div>
 
-<!-- ─── MATATU POPUP ─── -->
-<div class="matatu-popup" id="matatuPopup" role="dialog" aria-modal="true" aria-label="Matatu donation campaign">
-  <div class="matatu-popup-content">
-    <button class="popup-close" id="popupClose" aria-label="Dismiss campaign popup"><i class="fas fa-times"></i></button>
-    <a href="https://secure.givelively.org/donate/eternal-lifes-restoration-outreach/mega-crusade-kenya-ministry-bus-purchase" target="_blank" rel="noopener" class="popup-img-wrap" aria-label="View Matatu campaign">
-      <img src="https://ik.imagekit.io/vddpcxj7e/firebrand/matatu-firebrand.png?tr=f-auto,q-auto,w-700" alt="Matatu bus for new believers" loading="lazy">
-      <span class="popup-campaign-badge">Current Campaign</span>
-    </a>
-    <div class="popup-body">
-      <div>
-        <h3>Help Us Purchase<br>a Bus</h3>
-        <p>Winning souls is only the beginning - after the crusade, we want to help new believers get to church, grow in the Word, prayer, fellowship, and become rooted in Christ. Your giving makes this possible by providing transportation so they can come, connect, be discipled, and continue their journey of faith.</p>
-      </div>
-      <a href="https://secure.givelively.org/donate/eternal-lifes-restoration-outreach/mega-crusade-kenya-ministry-bus-purchase" target="_blank" rel="noopener" class="give-btn" aria-label="Give to the Matatu campaign">
-        <i class="fas fa-fire"></i> Give
-      </a>
-    </div>
-  </div>
-</div>
+
 
 <script>
 (function() {
-  const DONATE_URL = 'https://secure.givelively.org/donate/eternal-lifes-restoration-outreach/mega-crusade-kenya-ministry-bus-purchase';
+  const DONATE_URL = 'https://secure.givelively.org/donate/eternal-lifes-restoration-outreach/mega-crusade';
 
   // ─── IMAGE DATA ───
   const heroImages = [
@@ -908,15 +861,17 @@ body {
     'https://ik.imagekit.io/vddpcxj7e/firebrand/crusade/FNM04891.jpg?tr=f-auto,q-auto,w-1200',
     'https://ik.imagekit.io/vddpcxj7e/firebrand/crusade/FNM04997.jpg?tr=f-auto,q-auto,w-1200',
     'https://ik.imagekit.io/vddpcxj7e/firebrand/crusade/FNM06250.jpg?tr=f-auto,q-auto,w-1200',
+    'https://ik.imagekit.io/vddpcxj7e/firebrand/crusade/bek-crusade-edited.jpeg?tr=f-auto,q-auto,w-1200',
+    'https://ik.imagekit.io/vddpcxj7e/firebrand/food/food-program-crusade.jpeg?tr=f-auto,q-auto,w-1200',
   ];
 
   const fellowshipImages = [
     'https://ik.imagekit.io/vddpcxj7e/firebrand/fellowship-missions/DSC05517.jpg?tr=f-auto,q-auto,w-800',
     'https://ik.imagekit.io/vddpcxj7e/firebrand/fellowship-missions/FNM04869.jpg?tr=f-auto,q-auto,w-800',
+    'https://ik.imagekit.io/vddpcxj7e/firebrand/crusade/bek-crusade-edited.jpeg?tr=f-auto,q-auto,w-800',
     'https://ik.imagekit.io/vddpcxj7e/firebrand/fellowship-missions/FNM05700.jpg?tr=f-auto,q-auto,w-800',
     'https://ik.imagekit.io/vddpcxj7e/firebrand/fellowship-missions/FNM05712.jpg?tr=f-auto,q-auto,w-800',
     'https://ik.imagekit.io/vddpcxj7e/firebrand/fellowship-missions/FNM05717.jpg?tr=f-auto,q-auto,w-800',
-    'https://ik.imagekit.io/vddpcxj7e/firebrand/fellowship-missions/FNM06250.jpg?tr=f-auto,q-auto,w-800',
   ];
 
   const joyfulImages = [
@@ -936,6 +891,9 @@ body {
     'https://ik.imagekit.io/vddpcxj7e/firebrand/food/FNM05774.jpg?tr=f-auto,q-auto,w-800',
     'https://ik.imagekit.io/vddpcxj7e/firebrand/food/food1.jpeg?tr=f-auto,q-auto,w-800',
     'https://ik.imagekit.io/vddpcxj7e/firebrand/food/food2.jpeg?tr=f-auto,q-auto,w-800',
+    'https://ik.imagekit.io/vddpcxj7e/firebrand/food/bek-food-program.jpeg?tr=f-auto,q-auto,w-800',
+    'https://ik.imagekit.io/vddpcxj7e/firebrand/food/food-program-crusade.jpeg?tr=f-auto,q-auto,w-800',
+    'https://ik.imagekit.io/vddpcxj7e/firebrand/food/bekbmw-fp.jpeg?tr=f-auto,q-auto,w-800',
   ];
 
   const discipleshipImages = [
@@ -1016,32 +974,6 @@ body {
   lightboxClose.addEventListener('click', closeLightbox);
   lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
-
-  // ─── POPUP ───
-  const popup = document.getElementById('matatuPopup');
-  const popupClose = document.getElementById('popupClose');
-
-  // Show popup immediately on page load
-  popup.classList.add('visible');
-
-  popupClose.addEventListener('click', e => {
-    e.stopPropagation();
-    popup.classList.add('dismissed');
-  });
-
-  // Close on backdrop click
-  popup.addEventListener('click', e => {
-    if (e.target === popup) {
-      popup.classList.add('dismissed');
-    }
-  });
-
-  // Close on Escape key
-  document.addEventListener('keydown', e => {
-    if (e.key === 'Escape' && popup.classList.contains('visible')) {
-      popup.classList.add('dismissed');
-    }
-  });
 
   // ─── SCROLL REVEAL ───
   const revealEls = document.querySelectorAll('.reveal');
